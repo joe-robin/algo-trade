@@ -3,7 +3,7 @@ import { z } from 'zod'
 
 export async function POST(req: NextRequest) {
   try {
-    return Response.json({ message: 'hi this is a test' })
+    return Response.json({ message: 'Server Running' })
   } catch (error) {
     return new Response('error', { status: 500 })
   }
