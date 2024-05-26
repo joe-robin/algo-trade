@@ -11,3 +11,6 @@ export const MAX_INTERVAL = 4 * 60 * 60 * 1000 // Hours * Minutes * Seconds * Mi
  * How long will the get all trade api will get executed
  */
 export const MAX_LIMIT = 60 // Minutes
+
+export const BASE_URL = process.env.DHAN_URL
+export const TOKEN = process.env.TOKEN
