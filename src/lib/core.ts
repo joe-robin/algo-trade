@@ -1,4 +1,7 @@
 import { BASE_URL, TOKEN } from '@/utils/const'
+import clients from '@/json/client.json'
+import { OrderClient } from './orde-client'
+
 const headers = {
   'Content-Type': 'application/json',
   'access-token': TOKEN as string,
@@ -6,15 +9,11 @@ const headers = {
 
 async function createOrder(body: CreateOrder) {
   try {
-    const response = await fetch(`${BASE_URL}/orders`, {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: headers,
-    })
-    const resBody = await response.json()
-    return resBody
-  } catch (exeception) {
-    console.log(exeception)
+    const request = Object.values(clients).map(tkn => new OrderClient(tkn))
+    const response = await Promise.all(request.map(order => order.post(body)))
+    console.log(response, 'response')
+  } catch (error) {
+    console.log(error)
   }
 }
 
@@ -23,10 +22,11 @@ async function fetchOrders() {
     const response = await fetch(`${BASE_URL}/orders`, {
       headers: headers,
     })
-    const resBody = await response.json()
+    const resBody: Order[] = await response.json()
     return resBody
-  } catch (exeception) {
-    console.log(exeception)
+  } catch (error) {
+    console.log(error)
+    return []
   }
 }
 

@@ -1,7 +1,7 @@
-import { readFile, readFileSync, readdir, writeFileSync } from 'fs'
 import clienJSON from '@/json/client.json'
-import { z } from 'zod'
 import { InvalidUser } from '@/lib/error'
+import { writeFileSync } from 'fs'
+import { z } from 'zod'
 
 export async function GET(req: Request) {
   try {
